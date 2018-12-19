@@ -24,19 +24,25 @@ class ProjectsController extends Controller
     return view('projects.show', compact('project'));
   }
 
-  public function edit()
+  public function edit(Project $project)
   {
-    return view('projects.edit');
+    return view('projects.edit', compact('project'));
   }
 
-  public function update()
+  public function update(Project $project)
   {
+    $project->title = request('title');
+    $project->description = request('description');
+    $project->save();
 
+    return redirect('/projects/' . $project->id);
   }
 
-  public function destroy()
+  public function destroy(Project $project)
   {
+    $project->delete();
 
+    return redirect('/projects');
   }
 
   public function store()

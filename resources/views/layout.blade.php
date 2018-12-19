@@ -7,7 +7,7 @@
     <title>@yield('title', 'Owenvel')</title>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
     <!-- Styles -->
     <style>
@@ -72,6 +72,7 @@
 
 <ul>
     <li><a href="/">Home</a></li>
+    <li><a href="/admin">Dashboard</a></li>
     <li><a href="/about">About Us</a></li>
     <li><a href="/contact">Contact</a></li>
     <li><a href="/projects">Projects</a></li>
