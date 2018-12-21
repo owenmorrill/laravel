@@ -11,14 +11,27 @@
 |
 */
 
-Route::get('/', 'PagesController@home');
+use Illuminate\Filesystem\Filesystem;
+use App\Example;
+
+//app()->singleton('example', function () {
+//  return new Example;
+//});
+
+//Route::get('/', function () {
+//  dd(app('App\Task'));
+//  return view('welcome');
+//});
+
+//Route::get('/', 'PagesController@home');
 Route::get('/about', 'PagesController@about');
 Route::get('/contact', 'PagesController@contact');
 
 Route::resource('/projects', 'ProjectsController');
 
-Route::patch('/tasks/{task}', 'ProjectTasksController@update');
 Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
+Route::post('/completed-tasks/{task}', 'CompletedTasksController@store');
+Route::delete('/completed-tasks/{task}', 'CompletedTasksController@destroy');
 
 
 //Route::get('{slug}', 'PostController@show');
