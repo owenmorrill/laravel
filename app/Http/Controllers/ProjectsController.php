@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
   public function index()
   {
     $projects = Project::all();
@@ -31,7 +36,15 @@ class ProjectsController extends Controller
 
   public function update(Project $project)
   {
-    Project::update(request(['title','description']));
+    //dd(request()->all());
+    $attributes = request()->validate([
+      'title' => 'required|min:3',
+      'description' => 'required',
+    ]);
+
+    $attributes['owner_id'] = auth()->id();
+
+    Project::where('id', $project->id)->update($attributes);
 
     return redirect('/projects/' . $project->id);
   }
@@ -49,6 +62,10 @@ class ProjectsController extends Controller
       'title' => 'required|min:3',
       'description' => 'required',
     ]);
+
+    $attributes['owner_id'] = auth()->id();
+
+    //return dd($attributes);
     Project::create($attributes);
 
     return redirect('/projects');

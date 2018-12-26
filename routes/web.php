@@ -23,7 +23,7 @@ use App\Example;
 //  return view('welcome');
 //});
 
-//Route::get('/', 'PagesController@home');
+Route::get('/', 'PagesController@home');
 Route::get('/about', 'PagesController@about');
 Route::get('/contact', 'PagesController@contact');
 
@@ -37,3 +37,7 @@ Route::delete('/completed-tasks/{task}', 'CompletedTasksController@destroy');
 //Route::get('{slug}', 'PostController@show');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
